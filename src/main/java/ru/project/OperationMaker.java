@@ -6,6 +6,7 @@ import java.util.function.BinaryOperator;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
+@Component
 public class OperationMaker {
 
     Supplier<Model> datareader;

@@ -2,7 +2,7 @@ package ru.project;
 
 import java.util.Scanner;
 import java.util.function.Supplier;
-
+@Component
 public class DataReader implements Supplier<Model> {
     @Override
     public Model get() {
