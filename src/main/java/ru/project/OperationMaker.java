@@ -12,11 +12,8 @@ public class OperationMaker {
     Supplier<Model> datareader;
     Consumer<Model> printer;
     Map<String, BinaryOperator<Integer>> operations = new HashMap<>();
-    public void make() {
-        //Supplier supplier;
-        //Consumer cons;
-        //BinaryOperator bo;
 
+    public void make() {
         Model model = datareader.get();
         model.res = operations
                 .get(model.op)
