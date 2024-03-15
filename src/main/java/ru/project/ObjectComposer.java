@@ -11,14 +11,28 @@ public class ObjectComposer {
         try {
             System.out.println("packageName = " + packageName);
             String filePackageName = '/' + packageName.replace('.', '/');
+
+            //File f = new File(filePackageName);
             File f = new File("." + filePackageName);
+
+            var ff = f.listFiles();
+            System.out.println(ff.length);
+
             System.out.println("f = " + f);
             for (File file : f.listFiles()) {
-                //System.out.println("Filename = " + file.getName());
-                System.out.println("Filename = ");
+                System.out.println("Filename = " + file.getName());
                 if (!file.getName().endsWith("class")) continue;
+
                 String clzName = file.getName().split("\\.")[0];
+                //String clzName = file.getName();
+
+                System.out.println("clzName = " + clzName);
+
                 Class clz = Class.forName(packageName + "." + clzName);
+                //Class clz = Class.forName(packageName + "\\" + clzName);
+
+                System.out.println("clz = " + clz);
+
                 if (!clz.isAnnotationPresent(Component.class)) continue;
                 Component component = (Component) clz.getAnnotation(Component.class);
                 if (!component.value().equals("")) clzName = component.value();
