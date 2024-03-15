@@ -9,9 +9,9 @@ import java.util.function.Supplier;
 @Component
 public class OperationMaker {
 
-    Supplier<Model> datareader;
-    Consumer<Model> printer;
-    Map<String, BinaryOperator<Integer>> operations = new HashMap<>();
+    @Inject Supplier<Model> datareader;
+    @Inject Consumer<Model> printer;
+    @Inject Map<String, BinaryOperator<Integer>> operations = new HashMap<>();
 
     public void make() {
         Model model = datareader.get();
