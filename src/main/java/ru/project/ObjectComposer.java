@@ -9,56 +9,36 @@ public class ObjectComposer {
 
     public ObjectComposer(String packageName) {
         try {
+            System.out.println("*******************************************************");
+            System.out.println("packageName = " + packageName);
+            String filePackageName = '/' + packageName.replace('.', '/');
+            System.out.println("filePackageName = " + filePackageName);
 
-            //String filePackageName = '/' + packageName.replace('.', '/');
-            // File f = new File("." + filePackageName);
-            File f = new File(packageName);
-            for (File file : f.listFiles()) {
-                System.out.println("Filename = " + file.getName());
-                if (file.getName().endsWith("class")) continue;
-                String clzName = file.getName().split("\\.")[0];
-                Class clz = Class.forName("ru.project" + "." + clzName);
-                System.out.println("clz = " + clz);
-
-                if (!clz.isAnnotationPresent(Component.class)) continue;
-                Component component = (Component) clz.getAnnotation(Component.class);
-                if (!component.value().equals("")) clzName = component.value();
-                objects.put(clzName, clz.newInstance());
-            /*
-            //System.out.println("packageName = " + packageName);
-            //String filePackageName = '/' + packageName.replace('.', '/');
-
-            //File f = new File(filePackageName);
-            //File f = new File("." + filePackageName);
-            File f = new File(packageName);
+            File f = new File("." + filePackageName);
+            System.out.println("f = " + f);
 
             var ff = f.listFiles();
             System.out.println("Кол-во файлов в каталоге: " + ff.length);
 
-            System.out.println("f = " + f);
+            int cnt = 0;
             for (File file : f.listFiles()) {
+                cnt++;
+
+                System.out.println(cnt + " --------------------------------");
                 System.out.println("Filename = " + file.getName()); // имя исходного файла
 
-                //if (!file.getName().endsWith("class")) continue;
-                if (file.getName().endsWith("class")) continue;
+                if (!file.getName().endsWith("class")) continue;
 
                 String clzName = file.getName().split("\\.")[0];
-                //String clzName = file.getName();
-
                 System.out.println("clzName = " + clzName); // получили имя класса
 
-                //Class clz = Class.forName(packageName + "." + clzName);
-                //Class clz = Class.forName(packageName + "\\" + clzName);
                 Class clz = Class.forName("ru.project" + "." + clzName);
-
-
                 System.out.println("clz = " + clz);
 
                 if (!clz.isAnnotationPresent(Component.class)) continue;
                 Component component = (Component) clz.getAnnotation(Component.class);
                 if (!component.value().equals("")) clzName = component.value();
                 objects.put(clzName, clz.newInstance());
-                */
             }
         } catch (Exception ex) {
             throw new IllegalArgumentException(ex);
