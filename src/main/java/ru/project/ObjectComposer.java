@@ -9,10 +9,13 @@ public class ObjectComposer {
 
     public ObjectComposer(String packageName) {
         try {
+            System.out.println("packageName = " + packageName);
             String filePackageName = '/' + packageName.replace('.', '/');
             File f = new File("." + filePackageName);
+            System.out.println("f = " + f);
             for (File file : f.listFiles()) {
-                System.out.println("Filename = " + file.getName());
+                //System.out.println("Filename = " + file.getName());
+                System.out.println("Filename = ");
                 if (!file.getName().endsWith("class")) continue;
                 String clzName = file.getName().split("\\.")[0];
                 Class clz = Class.forName(packageName + "." + clzName);

@@ -16,7 +16,6 @@ public class StartIncorrect {
             case "-": res = x - y; break;
             case "*": res = x * y; break;
             case "/": res = x / y; break;
-
         }
         System.out.println(x+operation+y+"="+res);
     }
