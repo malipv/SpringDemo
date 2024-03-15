@@ -46,6 +46,12 @@ public class ObjectComposer {
                 if (!component.value().equals("")) clzName = component.value();
                 objects.put(clzName, clz.newInstance());
             }
+
+            //
+            /*for() {
+                в цикле пробежаться по всем полям, помеченным аннотацией Inject, и внедрить в них значения
+
+             }*/
         } catch (Exception ex) {
             throw new IllegalArgumentException(ex);
         }
