@@ -9,11 +9,28 @@ public class ObjectComposer {
 
     public ObjectComposer(String packageName) {
         try {
-            System.out.println("packageName = " + packageName);
-            String filePackageName = '/' + packageName.replace('.', '/');
+
+            //String filePackageName = '/' + packageName.replace('.', '/');
+            // File f = new File("." + filePackageName);
+            File f = new File(packageName);
+            for (File file : f.listFiles()) {
+                System.out.println("Filename = " + file.getName());
+                if (file.getName().endsWith("class")) continue;
+                String clzName = file.getName().split("\\.")[0];
+                Class clz = Class.forName("ru.project" + "." + clzName);
+                System.out.println("clz = " + clz);
+
+                if (!clz.isAnnotationPresent(Component.class)) continue;
+                Component component = (Component) clz.getAnnotation(Component.class);
+                if (!component.value().equals("")) clzName = component.value();
+                objects.put(clzName, clz.newInstance());
+            /*
+            //System.out.println("packageName = " + packageName);
+            //String filePackageName = '/' + packageName.replace('.', '/');
 
             //File f = new File(filePackageName);
-            File f = new File("." + filePackageName);
+            //File f = new File("." + filePackageName);
+            File f = new File(packageName);
 
             var ff = f.listFiles();
             System.out.println("Кол-во файлов в каталоге: " + ff.length);
@@ -41,6 +58,7 @@ public class ObjectComposer {
                 Component component = (Component) clz.getAnnotation(Component.class);
                 if (!component.value().equals("")) clzName = component.value();
                 objects.put(clzName, clz.newInstance());
+                */
             }
         } catch (Exception ex) {
             throw new IllegalArgumentException(ex);
