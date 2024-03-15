@@ -16,20 +16,24 @@ public class ObjectComposer {
             File f = new File("." + filePackageName);
 
             var ff = f.listFiles();
-            System.out.println(ff.length);
+            System.out.println("Кол-во файлов в каталоге: " + ff.length);
 
             System.out.println("f = " + f);
             for (File file : f.listFiles()) {
-                System.out.println("Filename = " + file.getName());
-                if (!file.getName().endsWith("class")) continue;
+                System.out.println("Filename = " + file.getName()); // имя исходного файла
+
+                //if (!file.getName().endsWith("class")) continue;
+                if (file.getName().endsWith("class")) continue;
 
                 String clzName = file.getName().split("\\.")[0];
                 //String clzName = file.getName();
 
-                System.out.println("clzName = " + clzName);
+                System.out.println("clzName = " + clzName); // получили имя класса
 
-                Class clz = Class.forName(packageName + "." + clzName);
+                //Class clz = Class.forName(packageName + "." + clzName);
                 //Class clz = Class.forName(packageName + "\\" + clzName);
+                Class clz = Class.forName("ru.project" + "." + clzName);
+
 
                 System.out.println("clz = " + clz);
 
