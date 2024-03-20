@@ -1,5 +1,8 @@
 package ru.project;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.BinaryOperator;
@@ -9,9 +12,9 @@ import java.util.function.Supplier;
 @Component
 public class OperationMaker {
 
-    @Inject Supplier<Model> datareader;
-    @Inject Consumer<Model> printer;
-    @Inject Map<String, BinaryOperator<Integer>> operations = new HashMap<>();
+    @Autowired Supplier<Model> datareader;
+    @Autowired Consumer<Model> printer;
+    @Autowired Map<String, BinaryOperator<Integer>> operations = new HashMap<>();
 
     public void make() {
         Model model = datareader.get();

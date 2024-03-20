@@ -1,5 +1,7 @@
 package ru.project;
 
+import org.springframework.stereotype.Component;
+
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;

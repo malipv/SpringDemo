@@ -1,5 +1,7 @@
 package ru.project;
 
+import  org.springframework.stereotype.Component;
+
 import java.util.Scanner;
 import java.util.function.Supplier;
 

@@ -1,5 +1,7 @@
 package ru.project;
 
+import org.springframework.stereotype.Component;
+
 import java.util.function.BinaryOperator;
 
 @Component("+")
