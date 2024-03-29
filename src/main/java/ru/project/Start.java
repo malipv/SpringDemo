@@ -10,6 +10,8 @@ import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.annotation.Resource;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 import java.util.Comparator;
 import java.util.List;
 
@@ -21,8 +23,7 @@ public class Start {
 
 @Configuration
 class Config {
-    @Qualifier("inject this")
-    @Bean
+    @Bean @Temp //@Primary
     Logic logic2() {
         return new Logic();
     }
@@ -33,13 +34,13 @@ class Config {
     }
 
     @Bean
-    Comparator<Integer> comparator(@Qualifier("inject this") Logic logic3) {
+    Comparator<Integer> comparator(@Temp Logic logic3) {
         System.out.println(logic3);
         return (x, y) -> x - y;
     }
 }
 
-@Qualifier("inject that")
+//@Qualifier("inject that")
 @Component
 class Logic {
     void init() {
@@ -60,3 +61,7 @@ class ProjectComponent {
         System.out.println(lst);
     }
 }
+
+@Qualifier("temp")
+@Retention(RetentionPolicy.RUNTIME)
+@interface Temp{}
