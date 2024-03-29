@@ -2,6 +2,7 @@ package ru.project;
 
 import org.springframework.beans.factory.ObjectFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.*;
 import org.springframework.stereotype.Component;
@@ -20,7 +21,7 @@ public class Start {
 
 @Configuration
 class Config {
-
+    @Qualifier("inject this")
     @Bean
     Logic logic2() {
         return new Logic();
@@ -32,11 +33,13 @@ class Config {
     }
 
     @Bean
-    Comparator<Integer> comparator(Logic logic) {
+    Comparator<Integer> comparator(@Qualifier("inject this") Logic logic3) {
+        System.out.println(logic3);
         return (x, y) -> x - y;
     }
 }
 
+@Qualifier("inject that")
 @Component
 class Logic {
     void init() {
@@ -52,7 +55,7 @@ class ProjectComponent {
     @Autowired
     Comparator<Integer> comparator;
 
-    @PostConstruct
+    //@PostConstruct
     public void init() {
         System.out.println(lst);
     }
