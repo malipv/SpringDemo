@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
+import javax.annotation.Resource;
 import java.util.Comparator;
 import java.util.List;
 
@@ -46,7 +47,7 @@ class Logic {
 //lookup
 @Component
 class ProjectComponent {
-    @Autowired(required = false)
+    @Resource(name = "logicList")
     List<Logic> lst;
     @Autowired
     Comparator<Integer> comparator;
